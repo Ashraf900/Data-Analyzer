@@ -20,19 +20,19 @@ class DataReader:
                 Data ={"inp":0, "change":0, "gain":0, "loss":0, "Avggain":0, "Avgloss":0, "MF":0}
                 if i==0:
                     Data["inp"] = round(data[i],3)   
-                if i > 0:
+                elif i > 0:
                     Data["inp"] = round(data[i],3)
                     Data["change"] = round(data[i] - data[i-1],3)
                     if Data["change"]>=0:
                         Data["gain"] = abs(Data["change"])
                         gain.append(Data["gain"])
-                    if Data["change"]<=0:
+                    elif Data["change"]<=0:
                         Data["loss"]  = abs(Data["change"])
                         loss.append(Data["loss"])
                     if i==14:
                         Data["Avggain"] = round(sum(gain)/14,3)
                         Data["Avgloss"] = round(sum(loss)/14,3)
-                    if i>14:
+                    elif i>14:
                         Data["Avggain"] = round(((all_data[i-1]["Avggain"]*13)+Data["gain"])/14,3)
                         Data["Avgloss"] = round(((all_data[i-1]["Avgloss"]*13)+Data["loss"])/14,3)
                     try:
